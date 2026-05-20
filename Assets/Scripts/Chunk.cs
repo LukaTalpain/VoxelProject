@@ -14,7 +14,8 @@ namespace Voxels
         Air = 0,
         Stone = 1,
         Dirt = 2,
-        Wood = 3
+        Wood = 3,
+        Grass = 4
     }
 
     public enum Facing : byte
@@ -32,9 +33,10 @@ namespace Voxels
         private static Dictionary<Blocks, BlockProperties> s_Properties = new Dictionary<Blocks, BlockProperties>
         {
             { Blocks.Air, new BlockProperties() },
-            { Blocks.Stone, new BlockProperties() { WestTexCoord = new Vector2Int(1, 0), TopTexCoord = new Vector2Int(1, 0) } },
-            { Blocks.Dirt, new BlockProperties() { WestTexCoord = new Vector2Int(2, 0), TopTexCoord = new Vector2Int(2, 0) } },
+            { Blocks.Stone, new BlockProperties() { WestTexCoord = new Vector2Int(0, 0), TopTexCoord = new Vector2Int(0, 0) } },
+            { Blocks.Dirt, new BlockProperties() { WestTexCoord = new Vector2Int(1, 0), TopTexCoord = new Vector2Int(1, 0) } },
             { Blocks.Wood, new BlockProperties() { WestTexCoord = new Vector2Int(4, 1), TopTexCoord = new Vector2Int(5, 1) } },
+            { Blocks.Grass, new BlockProperties() { WestTexCoord = new Vector2Int(2, 0), TopTexCoord = new Vector2Int(3, 0) } },
         };
 
         private static BlockProperties s_FallbackOnMissing = new BlockProperties();

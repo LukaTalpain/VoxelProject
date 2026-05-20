@@ -23,7 +23,7 @@ public class ChunkComponent : MonoBehaviour
                     {
                         if (y == 5 && Random.value < 0.1f)
                         {
-                            voxel.block = Blocks.Wood;
+                            voxel.block = Blocks.Grass;
                         }
                         else if (y < 5)
                         {
