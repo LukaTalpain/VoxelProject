@@ -32,7 +32,7 @@ public class ChunkComponent : MonoBehaviour
                             else if (y < 4)
                                 voxel.block = Random.value < 0.5f ? Blocks.Stone : Blocks.Dirt;
                             else
-                                voxel.block = Blocks.Dirt;
+                                voxel.block = Blocks.Grass;
                         }
                     }
                 }

@@ -59,15 +59,16 @@ namespace Voxels
             // Bottom Face (Y-)
             if (y == 0 || chunk.GetVoxelAt(x, y - 1, z).block == Blocks.Air)
             {
+                var bottomUvRect = GetFaceUVRect(props, Facing.Bottom);
                 vertices.Add(new Vector3(x, y, z));
                 vertices.Add(new Vector3(x + 1, y, z));
                 vertices.Add(new Vector3(x + 1, y, z + 1));
                 vertices.Add(new Vector3(x, y, z + 1));
 
-                uvs.Add(new Vector2(uvRect.x, uvRect.z));
-                uvs.Add(new Vector2(uvRect.y, uvRect.z));
-                uvs.Add(new Vector2(uvRect.y, uvRect.w));
-                uvs.Add(new Vector2(uvRect.x, uvRect.w));
+                uvs.Add(new Vector2(bottomUvRect.x, bottomUvRect.z));
+                uvs.Add(new Vector2(bottomUvRect.y, bottomUvRect.z));
+                uvs.Add(new Vector2(bottomUvRect.y, bottomUvRect.w));
+                uvs.Add(new Vector2(bottomUvRect.x, bottomUvRect.w));
 
                 normals.Add(Vector3.down);
                 normals.Add(Vector3.down);
@@ -118,15 +119,17 @@ namespace Voxels
             // South (Z-)
             if (z == 0 || chunk.GetVoxelAt(x, y, z - 1).block == Blocks.Air)
             {
+                var southUvRect = GetFaceUVRect(props, Facing.South);
+
                 vertices.Add(new Vector3(x, y, z));
                 vertices.Add(new Vector3(x + 1, y, z));
                 vertices.Add(new Vector3(x + 1, y + 1, z));
                 vertices.Add(new Vector3(x, y + 1, z));
 
-                uvs.Add(new Vector2(uvRect.x, uvRect.z));
-                uvs.Add(new Vector2(uvRect.y, uvRect.z));
-                uvs.Add(new Vector2(uvRect.y, uvRect.w));
-                uvs.Add(new Vector2(uvRect.x, uvRect.w));
+                uvs.Add(new Vector2(southUvRect.x, southUvRect.z));
+                uvs.Add(new Vector2(southUvRect.y, southUvRect.z));
+                uvs.Add(new Vector2(southUvRect.y, southUvRect.w));
+                uvs.Add(new Vector2(southUvRect.x, southUvRect.w));
 
                 normals.Add(Vector3.back);
                 normals.Add(Vector3.back);
@@ -146,15 +149,17 @@ namespace Voxels
             // North (Z+)
             if (z == 15 || chunk.GetVoxelAt(x, y, z + 1).block == Blocks.Air)
             {
+                var northUvRect = GetFaceUVRect(props, Facing.North);
+
                 vertices.Add(new Vector3(x, y, z + 1));
                 vertices.Add(new Vector3(x + 1, y, z + 1));
                 vertices.Add(new Vector3(x + 1, y + 1, z + 1));
                 vertices.Add(new Vector3(x, y + 1, z + 1));
 
-                uvs.Add(new Vector2(uvRect.x, uvRect.z));
-                uvs.Add(new Vector2(uvRect.y, uvRect.z));
-                uvs.Add(new Vector2(uvRect.y, uvRect.w));
-                uvs.Add(new Vector2(uvRect.x, uvRect.w));
+                uvs.Add(new Vector2(northUvRect.x, northUvRect.z));
+                uvs.Add(new Vector2(northUvRect.y, northUvRect.z));
+                uvs.Add(new Vector2(northUvRect.y, northUvRect.w));
+                uvs.Add(new Vector2(northUvRect.x, northUvRect.w));
 
                 normals.Add(Vector3.forward);
                 normals.Add(Vector3.forward);
@@ -174,15 +179,17 @@ namespace Voxels
             // West (X-)
             if (x == 0 || chunk.GetVoxelAt(x - 1, y, z).block == Blocks.Air)
             {
+                var westUvRect = GetFaceUVRect(props, Facing.West);
+
                 vertices.Add(new Vector3(x, y, z));
                 vertices.Add(new Vector3(x, y, z + 1));
                 vertices.Add(new Vector3(x, y + 1, z + 1));
                 vertices.Add(new Vector3(x, y + 1, z));
 
-                uvs.Add(new Vector2(uvRect.x, uvRect.z));
-                uvs.Add(new Vector2(uvRect.y, uvRect.z));
-                uvs.Add(new Vector2(uvRect.y, uvRect.w));
-                uvs.Add(new Vector2(uvRect.x, uvRect.w));
+                uvs.Add(new Vector2(westUvRect.x, westUvRect.z));
+                uvs.Add(new Vector2(westUvRect.y, westUvRect.z));
+                uvs.Add(new Vector2(westUvRect.y, westUvRect.w));
+                uvs.Add(new Vector2(westUvRect.x, westUvRect.w));
 
                 normals.Add(Vector3.left);
                 normals.Add(Vector3.left);
@@ -202,15 +209,17 @@ namespace Voxels
             // East (X+)
             if (x == 15 || chunk.GetVoxelAt(x + 1, y, z).block == Blocks.Air)
             {
+                var eastUvRect = GetFaceUVRect(props, Facing.East);
+
                 vertices.Add(new Vector3(x + 1, y, z));
                 vertices.Add(new Vector3(x + 1, y, z + 1));
                 vertices.Add(new Vector3(x + 1, y + 1, z + 1));
                 vertices.Add(new Vector3(x + 1, y + 1, z));
 
-                uvs.Add(new Vector2(uvRect.x, uvRect.z));
-                uvs.Add(new Vector2(uvRect.y, uvRect.z));
-                uvs.Add(new Vector2(uvRect.y, uvRect.w));
-                uvs.Add(new Vector2(uvRect.x, uvRect.w));
+                uvs.Add(new Vector2(eastUvRect.x, eastUvRect.z));
+                uvs.Add(new Vector2(eastUvRect.y, eastUvRect.z));
+                uvs.Add(new Vector2(eastUvRect.y, eastUvRect.w));
+                uvs.Add(new Vector2(eastUvRect.x, eastUvRect.w));
 
                 normals.Add(Vector3.right);
                 normals.Add(Vector3.right);

@@ -35,8 +35,8 @@ namespace Voxels
             { Blocks.Air, new BlockProperties() },
             { Blocks.Stone, new BlockProperties() { WestTexCoord = new Vector2Int(0, 0), TopTexCoord = new Vector2Int(0, 0) } },
             { Blocks.Dirt, new BlockProperties() { WestTexCoord = new Vector2Int(1, 0), TopTexCoord = new Vector2Int(1, 0) } },
-            { Blocks.Wood, new BlockProperties() { WestTexCoord = new Vector2Int(4, 1), TopTexCoord = new Vector2Int(5, 1) } },
-            { Blocks.Grass, new BlockProperties() { WestTexCoord = new Vector2Int(2, 0), TopTexCoord = new Vector2Int(3, 0) } },
+            { Blocks.Wood, new BlockProperties() { WestTexCoord = new Vector2Int(4, 1), TopTexCoord = new Vector2Int(5, 1), DownTexCoord = new Vector2Int(5,1) }},
+            { Blocks.Grass, new BlockProperties() { WestTexCoord = new Vector2Int(2, 0), TopTexCoord = new Vector2Int(3, 0),DownTexCoord = new Vector2Int(1,0) } },
         };
 
         private static BlockProperties s_FallbackOnMissing = new BlockProperties();
@@ -53,13 +53,16 @@ namespace Voxels
 
         public Vector2Int WestTexCoord { get; set; }
         public Vector2Int TopTexCoord { get; set; }
-        
+
+        public Vector2Int DownTexCoord { get; set; }
+
         public Vector2Int GetFaceTexCoord(Facing face)
         {
             switch (face)
             {
                 case Facing.West: return WestTexCoord;
                 case Facing.Top: return TopTexCoord;
+                case Facing.Bottom: return DownTexCoord;
                 default: return WestTexCoord;
             }
             
