@@ -35,7 +35,7 @@ namespace Voxels
             { Blocks.Air, new BlockProperties() },
             { Blocks.Stone, new BlockProperties() { WestTexCoord = new Vector2Int(0, 0), TopTexCoord = new Vector2Int(0, 0) } },
             { Blocks.Dirt, new BlockProperties() { WestTexCoord = new Vector2Int(1, 0), TopTexCoord = new Vector2Int(1, 0) } },
-            { Blocks.Wood, new BlockProperties() { WestTexCoord = new Vector2Int(4, 1), TopTexCoord = new Vector2Int(5, 1), DownTexCoord = new Vector2Int(5,1) }},
+            { Blocks.Wood, new BlockProperties() { WestTexCoord = new Vector2Int(5, 0), TopTexCoord = new Vector2Int(6, 0), DownTexCoord = new Vector2Int(6,0) }},
             { Blocks.Grass, new BlockProperties() { WestTexCoord = new Vector2Int(2, 0), TopTexCoord = new Vector2Int(3, 0),DownTexCoord = new Vector2Int(1,0) } },
         };
 

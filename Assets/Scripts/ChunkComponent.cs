@@ -1,6 +1,7 @@
+using System;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Voxels;
+using static UnityEditor.PlayerSettings;
 
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshCollider))]
@@ -50,8 +51,77 @@ public class ChunkComponent : MonoBehaviour
 
     public void DestroyBlock (Vector3 pos)
     {
+        pos = new Vector3Int((int)pos.x - (int)transform.position.x, (int)pos.y - (int)transform.position.y, (int)pos.z - (int)transform.position.z);
         ref Voxel voxel = ref m_Chunk.GetVoxelAt((uint)pos.x, (uint)pos.y, (uint)pos.z);
+        print ("position block to destroy : x : " + pos.x + " y : " + pos.y + " z : " + pos.z);
+        print ("block to destroy : " + voxel.block.ToString());
         voxel.block = Blocks.Air;
+        ReGenerateItsChunk();
+    }
+    
+    public void PlaceBlock (Vector3 _pos, Blocks block)
+    {
+        Vector3 pos = new Vector3Int((int)_pos.x - (int)transform.position.x, (int)_pos.y - (int)transform.position.y, (int)_pos.z - (int)transform.position.z);
+        if (pos.x < 0 || pos.x >= Chunk.ChunkSize)
+        {
+            int index;
+            if (pos.x < 0)
+            {
+                for ( int i = 0; i < voxelData.chunkGeneratorList.Count; i++)
+                {
+                    if (voxelData.chunkGeneratorList[i] == this.gameObject)
+                    {
+                        index = i;
+                        voxelData.chunkGeneratorList[index-4].GetComponent<ChunkComponent>().PlaceBlock(new Vector3(Chunk.ChunkSize -1, _pos.y, _pos.z), block);
+                    }
+                }
+                return;
+            }
+            else
+            {
+                for (int i = 0; i < voxelData.chunkGeneratorList.Count; i++)
+                {
+                    if (voxelData.chunkGeneratorList[i] == this.gameObject)
+                    {
+                        index = i;
+                        voxelData.chunkGeneratorList[index + 4].GetComponent<ChunkComponent>().PlaceBlock(new Vector3(_pos.x, _pos.y, _pos.z), block);
+                    }
+                }
+                return;
+            }   
+        }
+        else if (pos.z < 0 || pos.z >= Chunk.ChunkSize)
+        {
+            int index;
+            if (pos.z < 0)
+            {
+                for (int i = 0; i < voxelData.chunkGeneratorList.Count; i++)
+                {
+                    if (voxelData.chunkGeneratorList[i] == this.gameObject)
+                    {
+                        index = i;
+                        voxelData.chunkGeneratorList[index - 1].GetComponent<ChunkComponent>().PlaceBlock(new Vector3(_pos.x, _pos.y, _pos.z), block);
+                    }
+                }
+                return;
+            }
+            else
+            {
+                for (int i = 0; i < voxelData.chunkGeneratorList.Count; i++)
+                {
+                    if (voxelData.chunkGeneratorList[i] == this.gameObject)
+                    {
+                        index = i;
+                        voxelData.chunkGeneratorList[index + 1].GetComponent<ChunkComponent>().PlaceBlock(new Vector3(_pos.x, _pos.y, _pos.z), block);
+                    }
+                }
+                return;
+            }
+        }
+        ref Voxel voxel = ref m_Chunk.GetVoxelAt((uint)pos.x, (uint)pos.y, (uint)pos.z);
+        print ("position block to place : x : " + pos.x + " y : " + pos.y + " z : " + pos.z);
+        print ("block to place : " + block.ToString());
+        voxel.block = block;
         ReGenerateItsChunk();
     }
     private void OnDrawGizmosSelected()

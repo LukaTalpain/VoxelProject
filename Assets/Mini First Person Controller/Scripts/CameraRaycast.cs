@@ -1,9 +1,10 @@
-using System.Runtime.CompilerServices;
+
 using UnityEngine;
 using Voxels;
 
 public class CameraRaycast : MonoBehaviour
 {
+    public Blocks blockToPlace;
     public Camera cam;
     private void Update()
     {
@@ -13,7 +14,7 @@ public class CameraRaycast : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(1))
         {
-
+            PlaceRay();
         }
     }
     private void BreakRay ()
@@ -22,24 +23,85 @@ public class CameraRaycast : MonoBehaviour
         Vector3 point = target.point;
         Vector3 normal = target.normal;
         Facing face = GetFace(normal);
-        print ("face : "+face.ToString()+" x : " + point.x + " y : "+ point.y + " z : "+ point.z);
         if (point != Vector3.zero)
         {
             if (face == Facing.Top)
             {
-                Vector3 newPos = new Vector3 ((int)point.x, (int)point.y -1, (int) point.z);
+                Vector3 newPos = new Vector3((int)point.x, (int)point.y - 1, (int)point.z);
                 target.transform.gameObject.GetComponent<ChunkComponent>().DestroyBlock(newPos);
-                print(" x : " + newPos.x + " y : " + newPos.y + " z : " + newPos.z);
+            }
+            else if (face == Facing.North)
+            {
+                Vector3 newPos = new Vector3((int)point.x, (int)point.y, (int)point.z-1);
+                target.transform.gameObject.GetComponent<ChunkComponent>().DestroyBlock(newPos);
+            }
+            else if (face == Facing.South)
+            {
+                Vector3 newPos = new Vector3((int)point.x, (int)point.y, (int)point.z);
+                target.transform.gameObject.GetComponent<ChunkComponent>().DestroyBlock(newPos);
+            }
+            else if (face == Facing.East)
+            {
+                Vector3 newPos = new Vector3((int)point.x - 1, (int)point.y, (int)point.z);
+                target.transform.gameObject.GetComponent<ChunkComponent>().DestroyBlock(newPos);
+            }
+            else if (face == Facing.West)
+            {
+                Vector3 newPos = new Vector3((int)point.x, (int)point.y, (int)point.z);
+                target.transform.gameObject.GetComponent<ChunkComponent>().DestroyBlock(newPos);
+
+            }
+            else if (face == Facing.Bottom)
+            {
+                Vector3 newPos = new Vector3((int)point.x, (int)point.y, (int)point.z);
+                target.transform.gameObject.GetComponent<ChunkComponent>().DestroyBlock(newPos);
             }
 
-
-
-            //target.transform.gameObject.GetComponent<ChunkComponent>().DestroyBlock(point);
         }
 
     }
     private void PlaceRay()
     {
+        RaycastHit target = ShootRayCast();
+        Vector3 point = target.point;
+        Vector3 normal = target.normal;
+        Facing face = GetFace(normal);
+        print ("face : " + face.ToString());
+        if (point != Vector3.zero)
+        {
+            if (face == Facing.Top)
+            {
+                Vector3 newPos = new Vector3((int)point.x, (int)point.y, (int)point.z);
+                target.transform.gameObject.GetComponent<ChunkComponent>().PlaceBlock(newPos, blockToPlace);
+            }
+            else if (face == Facing.North)
+            {
+                Vector3 newPos = new Vector3((int)point.x, (int)point.y, (int)point.z);
+                target.transform.gameObject.GetComponent<ChunkComponent>().PlaceBlock(newPos, blockToPlace);
+            }
+            else if (face == Facing.South)
+            {
+                Vector3 newPos = new Vector3((int)point.x, (int)point.y, (int)point.z-1);
+                target.transform.gameObject.GetComponent<ChunkComponent>().PlaceBlock(newPos, blockToPlace);
+            }
+            else if (face == Facing.East)
+            {
+                Vector3 newPos = new Vector3((int)point.x , (int)point.y, (int)point.z);
+                target.transform.gameObject.GetComponent<ChunkComponent>().PlaceBlock(newPos, blockToPlace);
+            }
+            else if (face == Facing.West)
+            {
+                Vector3 newPos = new Vector3((int)point.x -1 , (int)point.y, (int)point.z);
+                target.transform.gameObject.GetComponent<ChunkComponent>().PlaceBlock(newPos, blockToPlace);
+
+            }
+            else if (face == Facing.Bottom)
+            {
+                Vector3 newPos = new Vector3((int)point.x, (int)point.y - 1, (int)point.z);
+                target.transform.gameObject.GetComponent<ChunkComponent>().PlaceBlock(newPos, blockToPlace);
+            }
+
+        }
 
     }
 
@@ -50,12 +112,10 @@ public class CameraRaycast : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 100f))
         {
-            Debug.Log("Touché : " + hit.collider.gameObject.name);
             return hit;
         }
         else
         {
-            print("pas cooooool du otut ");
             return new RaycastHit();
         }
 
