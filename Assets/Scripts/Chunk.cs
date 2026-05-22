@@ -17,6 +17,7 @@ namespace Voxels
         Wood = 3,
         Grass = 4,
         Plank = 5,
+        Cobble = 6,
     }
 
     public enum Facing : byte
@@ -39,6 +40,7 @@ namespace Voxels
             { Blocks.Wood, new BlockProperties() { WestTexCoord = new Vector2Int(5, 0), TopTexCoord = new Vector2Int(6, 0), DownTexCoord = new Vector2Int(6,0) }},
             { Blocks.Grass, new BlockProperties() { WestTexCoord = new Vector2Int(2, 0), TopTexCoord = new Vector2Int(3, 0),DownTexCoord = new Vector2Int(1,0) } },
             { Blocks.Plank, new BlockProperties() { WestTexCoord = new Vector2Int(5, 1),TopTexCoord = new Vector2Int(5, 1), DownTexCoord = new Vector2Int(5,1) } },
+            { Blocks.Cobble, new BlockProperties() { WestTexCoord = new Vector2Int(4, 0),TopTexCoord = new Vector2Int(4, 0), DownTexCoord = new Vector2Int(4, 0) } },
         };
 
         private static BlockProperties s_FallbackOnMissing = new BlockProperties();

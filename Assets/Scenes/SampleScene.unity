@@ -363,7 +363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5c09c9367d1ad459e4564163ca0c92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraRaycast
-  blockToPlace: 3
+  blockToPlace: 1
   cam: {fileID: 109370965}
 --- !u!1 &832575517
 GameObject:

@@ -66,7 +66,6 @@ public class CameraRaycast : MonoBehaviour
         Vector3 point = target.point;
         Vector3 normal = target.normal;
         Facing face = GetFace(normal);
-        print ("face : " + face.ToString());
         if (point != Vector3.zero)
         {
             if (face == Facing.Top)

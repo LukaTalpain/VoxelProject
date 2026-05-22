@@ -53,8 +53,6 @@ public class ChunkComponent : MonoBehaviour
     {
         pos = new Vector3Int((int)pos.x - (int)transform.position.x, (int)pos.y - (int)transform.position.y, (int)pos.z - (int)transform.position.z);
         ref Voxel voxel = ref m_Chunk.GetVoxelAt((uint)pos.x, (uint)pos.y, (uint)pos.z);
-        print ("position block to destroy : x : " + pos.x + " y : " + pos.y + " z : " + pos.z);
-        print ("block to destroy : " + voxel.block.ToString());
         voxel.block = Blocks.Air;
         ReGenerateItsChunk();
     }
@@ -72,7 +70,7 @@ public class ChunkComponent : MonoBehaviour
                     if (voxelData.chunkGeneratorList[i] == this.gameObject)
                     {
                         index = i;
-                        voxelData.chunkGeneratorList[index-4].GetComponent<ChunkComponent>().PlaceBlock(new Vector3(Chunk.ChunkSize -1, _pos.y, _pos.z), block);
+                        voxelData.chunkGeneratorList[index- voxelData.mapSize].GetComponent<ChunkComponent>().PlaceBlock(new Vector3(_pos.x, _pos.y, _pos.z), block);
                     }
                 }
                 return;
@@ -84,7 +82,7 @@ public class ChunkComponent : MonoBehaviour
                     if (voxelData.chunkGeneratorList[i] == this.gameObject)
                     {
                         index = i;
-                        voxelData.chunkGeneratorList[index + 4].GetComponent<ChunkComponent>().PlaceBlock(new Vector3(_pos.x, _pos.y, _pos.z), block);
+                        voxelData.chunkGeneratorList[index + voxelData.mapSize].GetComponent<ChunkComponent>().PlaceBlock(new Vector3(_pos.x, _pos.y, _pos.z), block);
                     }
                 }
                 return;
@@ -119,8 +117,6 @@ public class ChunkComponent : MonoBehaviour
             }
         }
         ref Voxel voxel = ref m_Chunk.GetVoxelAt((uint)pos.x, (uint)pos.y, (uint)pos.z);
-        print ("position block to place : x : " + pos.x + " y : " + pos.y + " z : " + pos.z);
-        print ("block to place : " + block.ToString());
         voxel.block = block;
         ReGenerateItsChunk();
     }
